@@ -8,9 +8,14 @@ function numeriRandom(min, max) {
 //creo array per contenere i numeri random
 var numeriEstratti = [];
 
+//utente inserisce il max dei numeri estraibili
+do {
+    var numeroMax = parseInt(prompt("Inserisci il massimo numero estraibile dal pc! [>= a 5]"));
+} while (isNaN(numeroMax) || numeroMax < 5);
+
 //creo ciclo per estrarre numeri random 5 volte
 while (numeriEstratti.length < 5) {
-    var numero = numeriRandom(1, 100);
+    var numero = numeriRandom(1, numeroMax);
     if (!numeriEstratti.includes(numero)) {
         numeriEstratti.push(numero);
     }
@@ -27,7 +32,8 @@ var numeriUtente = [];
 var intervallo = setInterval(function () {
     tempo--;
     document.getElementById("timer").innerHTML = tempo;
-    if (tempo == 0) { //sistemare! parte prima l'allerta e poi si stampa a video lo 0
+    //quando tempo = 0 stoppo seiInterval, faccio inserire i numeri dall'utente e stampo il risultato
+    if (tempo == 0) { //******* sistemare! parte prima l'allerta e poi si stampa a video lo 0 *******
         clearInterval(intervallo);
 
 
@@ -35,15 +41,28 @@ var intervallo = setInterval(function () {
         //i numeri che ha visto precedentemente, tramite il prompt().
         //Dopo che sono stati inseriti i 5 numeri, il software dice
         //quanti e quali dei numeri da indovinare sono stati individuati.
+
         for (var i = 0; i < 5; i++){
+            //ciclo do-while per verificare che sia un numero (con parseInt lo rendo intero)
             do {
                 var numeroInserito = parseInt(prompt(`Inserisci il ${i + 1} numero!`));
             } while (isNaN(numeroInserito));
-            if (numeriEstratti.includes(numeroInserito)) {
+            //verificare che numero inserito non sia uguale ai numeri gia inseriti in array numeri utente
+            if (numeriUtente.includes(numeroInserito)) {
+                alert("Non puoi inserire più volte lo stesso numero!");
+                i--;
+            } else if (numeriEstratti.includes(numeroInserito)) { //if per verificare se numeroInserito è uguale ad un numero estratto, se è vero lo pusho nell'arrey dei numero digitati dall'utente
                 numeriUtente.push(numeroInserito);
             }
         }
-        alert(`Ne hai indovinati ${numeriUtente.length} su ${numeriEstratti.length}! Cioè hai indovinato: ${numeriUtente}.`);
+        //creo casi specifici su quanti indovinati
+        if (numeriUtente.length == 0) {
+            alert("Non hai indovinato neanche un numero! Mi spiace!");
+        } else if (numeriUtente.length == 1) {
+            alert(`Hai indovinato 1 solo numero su ${numeriEstratti.length}! Cioè hai indovinato: ${numeriUtente}.`);
+        } else {
+            alert(`Hai indovinato ${numeriUtente.length} numeri su ${numeriEstratti.length}! Cioè hai indovinato: ${numeriUtente}.`);
+        }
     }
 }, 1000);
 
