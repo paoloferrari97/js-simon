@@ -26,7 +26,7 @@ alert("I numeri estratti sono: " + numeriEstratti + ". Memorizzali!");
 
 
 //Da li parte un timer di 30 secondi.
-var tempo = 5; //31
+var tempo = 31; //31
 var numeriUtente = [];
 
 var intervallo = setInterval(function () {
@@ -63,6 +63,8 @@ var intervallo = setInterval(function () {
         } else {
             alert(`Hai indovinato ${numeriUtente.length} numeri su ${numeriEstratti.length}! Cioè hai indovinato: ${numeriUtente}.`);
         }
+    } else {
+        document.getElementById("timer").innerHTML = tempo - 1;
     }
 }, 1000);
 
