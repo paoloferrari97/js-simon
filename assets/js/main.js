@@ -26,14 +26,15 @@ alert("I numeri estratti sono: " + numeriEstratti + ". Memorizzali!");
 
 
 //Da li parte un timer di 30 secondi.
-var tempo = 31; //31
+var tempo = 5; //31
 var numeriUtente = [];
+var numeriUtenteTutti = [];
 
 var intervallo = setInterval(function () {
     tempo--;
     document.getElementById("timer").innerHTML = tempo;
     //quando tempo = 0 stoppo seiInterval, faccio inserire i numeri dall'utente e stampo il risultato
-    if (tempo == 0) { //******* sistemare! parte prima l'allerta e poi si stampa a video lo 0 *******
+    if (tempo == 0) {
         clearInterval(intervallo);
 
 
@@ -53,15 +54,27 @@ var intervallo = setInterval(function () {
                 i--;
             } else if (numeriEstratti.includes(numeroInserito)) { //if per verificare se numeroInserito è uguale ad un numero estratto, se è vero lo pusho nell'arrey dei numero digitati dall'utente
                 numeriUtente.push(numeroInserito);
+                numeriUtenteTutti.push(numeroInserito);
+            } else {
+                numeriUtenteTutti.push(numeroInserito);
             }
         }
         //creo casi specifici su quanti indovinati
         if (numeriUtente.length == 0) {
             alert("Non hai indovinato neanche un numero! Mi spiace!");
+            document.getElementById("messaggio").innerHTML = "Non hai indovinato neanche un numero! Mi spiace!";
+            document.getElementById("numeri_utente").innerHTML = "I numeri da te inseriti sono: " + numeriUtenteTutti + ".";
+            document.getElementById("numeri_random").innerHTML = "I numeri estratti dal computer sono: " + numeriEstratti + ".";
         } else if (numeriUtente.length == 1) {
             alert(`Hai indovinato 1 solo numero su ${numeriEstratti.length}! Cioè hai indovinato: ${numeriUtente}.`);
+            document.getElementById("messaggio").innerHTML = `Hai indovinato 1 solo numero su ${numeriEstratti.length}! Cioè hai indovinato: ${numeriUtente}.`;
+            document.getElementById("numeri_utente").innerHTML = "I numeri da te inseriti sono: " + numeriUtenteTutti + ".";
+            document.getElementById("numeri_random").innerHTML = "I numeri estratti dal computer sono: " + numeriEstratti + ".";
         } else {
             alert(`Hai indovinato ${numeriUtente.length} numeri su ${numeriEstratti.length}! Cioè hai indovinato: ${numeriUtente}.`);
+            document.getElementById("messaggio").innerHTML = `Hai indovinato ${numeriUtente.length} numeri su ${numeriEstratti.length}! Cioè hai indovinato: ${numeriUtente}.`;
+            document.getElementById("numeri_utente").innerHTML = "I numeri da te inseriti sono: " + numeriUtenteTutti + ".";
+            document.getElementById("numeri_random").innerHTML = "I numeri estratti dal computer sono: " + numeriEstratti + ".";
         }
     } else {
         document.getElementById("timer").innerHTML = tempo - 1;

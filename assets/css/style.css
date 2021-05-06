@@ -4,11 +4,31 @@
   box-sizing: border-box;
 }
 
-#timer {
+.timer {
   width: 100%;
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 200px;
+}
+
+#timer {
+  background-color: cadetblue;
+  box-shadow: 5px 5px 5px black;
+  padding: 10px 100px 10px 100px;
+  border-radius: 20px;
+  margin-top: 10px;
+}
+
+#container,
+#numeri_utente,
+#numeri_random,
+#messaggio {
+  width: 80%;
+  margin: auto;
+  background-color: cadetblue;
+  box-shadow: 5px 5px 5px black;
+  border-radius: 20px;
+  margin-top: 20px;
+  font-size: 50px;
 }
